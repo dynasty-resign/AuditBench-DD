@@ -1,0 +1,600 @@
+﻿# AuditBench-DD E2a - CIFAR-100 external condensed-set source registry.
+#
+# Same provenance discipline as the E0 CIFAR-10 registry (see
+# manifests/cifar10_external_sources.yaml for the tier/state semantics).
+# Official URLs below were enumerated 2026-09-05 (iter-0005) from:
+#   * DC-BENCH official Google Drive folder 1trp0MyUoL9QrbsdQ8w7TxgoXcMJecoyH
+#     (same folder as E0; CIFAR-100 subtree measured to contain
+#     DC/DSA/DM/TM/random/kmeans-emb x IPC{1,10,50}).
+#   * VICO-UoE DatasetCondensation Drive folder 1Dp6V6RvhJQPsB-2uZCwdlHXf1iJ9Wb_g
+#     (CIFAR-100: DC and DSA at IPC1/10 only).
+#   * IDC official Drive folder 1yh0Hf2ia4b-1edMiAr1kXCH4eUcYNfmz
+#     (CIFAR-100: IPC10/IPC20 only; IPC20 is not a target IPC).
+#   * DataDAM HuggingFace dataset uoft-dsp-lab/DataDAM (cifar100/ IPC1/10/50).
+# DC-BENCH kmeans-emb CIFAR-100 files exist but are NOT registered per the
+# iter-0004 supervisor decision (kmeans-emb stays excluded).
+# `files`/`pinned_sha256` are spliced in by scripts/map_e2_blobs.py after
+# structural inspection (never inferred from file names).
+
+version: 1
+dataset: cifar100
+
+# Pre-frozen method_family taxonomy (identical to the E0 frozen taxonomy).
+taxonomy:
+  - selection_family
+  - gradient_family
+  - distribution_family
+  - trajectory_family
+  - kernel_family
+  - parameterization_family
+  - attention_family
+  - generative_family
+
+sources:
+  - source_id: dcbench.dc
+    release_lineage: dc_zhao2021_iccv
+    method: DC
+    method_family: gradient_family
+    distribution: dcbench
+    dataset: cifar100
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DC_CIFAR100_ConvNet_1ipc.pt: 6713be7446d14793a7824c3f2f3ea30def64b16ab0a21bfaf63ed5e38915130f
+      cand01_res_DC_CIFAR100_ConvNet_10ipc.pt: 6865013437d79639d104dec0e1daf449d2df3a1fec730c0f1f816d5b943692e6
+      cand02_res_DC_CIFAR100_ConvNet_50ipc.pt: 23d34615d21ba49683d6002946f135e51b062ddb55cbbe28aaf263f7fe62dbba
+    files:
+      - relpath: cand00_res_DC_CIFAR100_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=15sCo8HLaEpnspSMlXbUc973qvAUEF5uh
+        evidence:
+          - relpath: cand00_res_DC_CIFAR100_ConvNet_1ipc.pt
+            sha256: 6713be7446d14793a7824c3f2f3ea30def64b16ab0a21bfaf63ed5e38915130f
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: [-7.17, 6.4855]
+      - relpath: cand01_res_DC_CIFAR100_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1Ha4BbmYQK186g83-8Uh-rHzQKy4jXs4_
+        evidence:
+          - relpath: cand01_res_DC_CIFAR100_ConvNet_10ipc.pt
+            sha256: 6865013437d79639d104dec0e1daf449d2df3a1fec730c0f1f816d5b943692e6
+            kind: checkpoint_list
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-8.9447, 7.9392]
+      - relpath: cand02_res_DC_CIFAR100_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1L8Ni6hkkaDm1LDRAWSgOL0qCbUFZi8NP
+        evidence:
+          - relpath: cand02_res_DC_CIFAR100_ConvNet_50ipc.pt
+            sha256: 23d34615d21ba49683d6002946f135e51b062ddb55cbbe28aaf263f7fe62dbba
+            kind: checkpoint_list
+            n_images: 5000
+            image_shape: [5000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50, "10": 50, "11": 50, "12": 50, "13": 50, "14": 50, "15": 50, "16": 50, "17": 50, "18": 50, "19": 50, "20": 50, "21": 50, "22": 50, "23": 50, "24": 50, "25": 50, "26": 50, "27": 50, "28": 50, "29": 50, "30": 50, "31": 50, "32": 50, "33": 50, "34": 50, "35": 50, "36": 50, "37": 50, "38": 50, "39": 50, "40": 50, "41": 50, "42": 50, "43": 50, "44": 50, "45": 50, "46": 50, "47": 50, "48": 50, "49": 50, "50": 50, "51": 50, "52": 50, "53": 50, "54": 50, "55": 50, "56": 50, "57": 50, "58": 50, "59": 50, "60": 50, "61": 50, "62": 50, "63": 50, "64": 50, "65": 50, "66": 50, "67": 50, "68": 50, "69": 50, "70": 50, "71": 50, "72": 50, "73": 50, "74": 50, "75": 50, "76": 50, "77": 50, "78": 50, "79": 50, "80": 50, "81": 50, "82": 50, "83": 50, "84": 50, "85": 50, "86": 50, "87": 50, "88": 50, "89": 50, "90": 50, "91": 50, "92": 50, "93": 50, "94": 50, "95": 50, "96": 50, "97": 50, "98": 50, "99": 50}
+            value_range: [-8.5138, 8.5942]
+    status: fetched
+    notes: >
+      DC-BENCH official release (NeurIPS 2022 D&B), CIFAR-100 subtree of the
+      same Drive folder as E0. ZCA variants, when present, are registered as
+      separate zca_only stratum entries, never mixed into primary.
+
+  - source_id: dcbench.dsa
+    release_lineage: dsa_zhao2021_iccvw
+    method: DSA
+    method_family: gradient_family
+    distribution: dcbench
+    dataset: cifar100
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DSA_CIFAR100_ConvNet_1ipc.pt: 9fcb5d6bdfb329a81a2cfd1769a0bf121a1922ffeb7f8f53cfe5282189957150
+      cand01_res_DSA_CIFAR100_ConvNet_10ipc.pt: 1b924f964b82dc9874fce30d3f73f689b3aeb0990c24470fb45428aa7f597c0b
+      cand02_res_DSA_CIFAR100_ConvNet_50ipc.pt: 74111dfdbd32a940b707f38055e2768ccaa785d6e18013214ca4f364acb19c50
+    files:
+      - relpath: cand00_res_DSA_CIFAR100_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=13jG9IO-holIDEN7RyU_aD4I6OF-pAvfu
+        evidence:
+          - relpath: cand00_res_DSA_CIFAR100_ConvNet_1ipc.pt
+            sha256: 9fcb5d6bdfb329a81a2cfd1769a0bf121a1922ffeb7f8f53cfe5282189957150
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: [-4.9601, 4.8742]
+      - relpath: cand01_res_DSA_CIFAR100_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1vyVN8NgzjmD8jGth5_NXPr1WPObKkIpl
+        evidence:
+          - relpath: cand01_res_DSA_CIFAR100_ConvNet_10ipc.pt
+            sha256: 1b924f964b82dc9874fce30d3f73f689b3aeb0990c24470fb45428aa7f597c0b
+            kind: checkpoint_list
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-5.1205, 4.945]
+      - relpath: cand02_res_DSA_CIFAR100_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=16Hy4NScjzQjVPW9TmAhJIkOjXGM8Q4PC
+        evidence:
+          - relpath: cand02_res_DSA_CIFAR100_ConvNet_50ipc.pt
+            sha256: 74111dfdbd32a940b707f38055e2768ccaa785d6e18013214ca4f364acb19c50
+            kind: checkpoint_list
+            n_images: 5000
+            image_shape: [5000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50, "10": 50, "11": 50, "12": 50, "13": 50, "14": 50, "15": 50, "16": 50, "17": 50, "18": 50, "19": 50, "20": 50, "21": 50, "22": 50, "23": 50, "24": 50, "25": 50, "26": 50, "27": 50, "28": 50, "29": 50, "30": 50, "31": 50, "32": 50, "33": 50, "34": 50, "35": 50, "36": 50, "37": 50, "38": 50, "39": 50, "40": 50, "41": 50, "42": 50, "43": 50, "44": 50, "45": 50, "46": 50, "47": 50, "48": 50, "49": 50, "50": 50, "51": 50, "52": 50, "53": 50, "54": 50, "55": 50, "56": 50, "57": 50, "58": 50, "59": 50, "60": 50, "61": 50, "62": 50, "63": 50, "64": 50, "65": 50, "66": 50, "67": 50, "68": 50, "69": 50, "70": 50, "71": 50, "72": 50, "73": 50, "74": 50, "75": 50, "76": 50, "77": 50, "78": 50, "79": 50, "80": 50, "81": 50, "82": 50, "83": 50, "84": 50, "85": 50, "86": 50, "87": 50, "88": 50, "89": 50, "90": 50, "91": 50, "92": 50, "93": 50, "94": 50, "95": 50, "96": 50, "97": 50, "98": 50, "99": 50}
+            value_range: [-3.9603, 3.9481]
+    status: fetched
+    notes: >
+      Differentiable Siamese Augmentation; independent paper lineage.
+
+  - source_id: dcbench.dm
+    release_lineage: dm_zhao2023_wacv
+    method: DM
+    method_family: distribution_family
+    distribution: dcbench
+    dataset: cifar100
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DM_CIFAR100_ConvNet_1ipc.pt: 2d3faaec9ccc1acde54b29a93c0a0609628e93786c9ae0bfa3b3a450a8bfb35e
+      cand01_res_DM_CIFAR100_ConvNet_10ipc.pt: 4d12d80f5987a7f8a75286378718915ab90dd9c94ff610c0357dfa624969434c
+      cand02_res_DM_CIFAR100_ConvNet_50ipc.pt: 4b53a043db367c440420539f9d20847b775b89c954f9e665010e0c24c40e9714
+    files:
+      - relpath: cand00_res_DM_CIFAR100_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1ILwtLeQthvYAM3fbd0hpZ0qYnLnfmXRF
+        evidence:
+          - relpath: cand00_res_DM_CIFAR100_ConvNet_1ipc.pt
+            sha256: 2d3faaec9ccc1acde54b29a93c0a0609628e93786c9ae0bfa3b3a450a8bfb35e
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: [-60.2578, 42.7626]
+      - relpath: cand01_res_DM_CIFAR100_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1XIOtFtyYaC7la_9hxUNk8-d3cRkbnkko
+        evidence:
+          - relpath: cand01_res_DM_CIFAR100_ConvNet_10ipc.pt
+            sha256: 4d12d80f5987a7f8a75286378718915ab90dd9c94ff610c0357dfa624969434c
+            kind: checkpoint_list
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-5.5684, 6.2825]
+      - relpath: cand02_res_DM_CIFAR100_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1xRCI_B2-__LluWNZvtBQGBY87UcLo7qv
+        evidence:
+          - relpath: cand02_res_DM_CIFAR100_ConvNet_50ipc.pt
+            sha256: 4b53a043db367c440420539f9d20847b775b89c954f9e665010e0c24c40e9714
+            kind: checkpoint_list
+            n_images: 5000
+            image_shape: [5000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50, "10": 50, "11": 50, "12": 50, "13": 50, "14": 50, "15": 50, "16": 50, "17": 50, "18": 50, "19": 50, "20": 50, "21": 50, "22": 50, "23": 50, "24": 50, "25": 50, "26": 50, "27": 50, "28": 50, "29": 50, "30": 50, "31": 50, "32": 50, "33": 50, "34": 50, "35": 50, "36": 50, "37": 50, "38": 50, "39": 50, "40": 50, "41": 50, "42": 50, "43": 50, "44": 50, "45": 50, "46": 50, "47": 50, "48": 50, "49": 50, "50": 50, "51": 50, "52": 50, "53": 50, "54": 50, "55": 50, "56": 50, "57": 50, "58": 50, "59": 50, "60": 50, "61": 50, "62": 50, "63": 50, "64": 50, "65": 50, "66": 50, "67": 50, "68": 50, "69": 50, "70": 50, "71": 50, "72": 50, "73": 50, "74": 50, "75": 50, "76": 50, "77": 50, "78": 50, "79": 50, "80": 50, "81": 50, "82": 50, "83": 50, "84": 50, "85": 50, "86": 50, "87": 50, "88": 50, "89": 50, "90": 50, "91": 50, "92": 50, "93": 50, "94": 50, "95": 50, "96": 50, "97": 50, "98": 50, "99": 50}
+            value_range: [-3.3013, 3.7047]
+    status: fetched
+    notes: >
+      Distribution Matching (WACV 2023); independent paper lineage.
+
+  - source_id: dcbench.tm_mtt
+    release_lineage: mtt_cazenavette2022_cvpr
+    method: MTT
+    method_family: trajectory_family
+    distribution: dcbench
+    dataset: cifar100
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_images_best.pt: f4a15e4fb1f79042ef361133a0b4a67b81b9a96859ee113f59ea4554f9075d93
+      cand01_labels_best.pt: f3ee0294c21908b81f1f95bd86d52248c68c114cd5d99eb93c700c00ceb2f336
+      cand02_images_best.pt: eac8d1d5d20709b98bf16b8eb813ceb01af64177f7ed6063173bf822140c76d2
+      cand03_labels_best.pt: f76c6abb3f46c92c5892f2d6a7c545fba95b816608611d756bf0680c7e3adeff
+      cand04_images_best.pt: cbb8076f471afe40aa791d0cf45a049b587336a92539f3b2f639d4ae33c1b34c
+      cand05_labels_best.pt: c9d5672e4daa8e36a41016644955fedcb5fe84f464b867dc832510b0bec00150
+    files:
+      - parts:
+          - relpath: cand00_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1E6W_EswDfdtCtvIk1UBaevDOt3s4Ay_t
+          - relpath: cand01_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1a-psG-WOfa1SMEMlW6kqRv19-iA-iz3v
+        ipc: 1
+        evidence:
+          - relpath: cand00_images_best.pt
+            sha256: f4a15e4fb1f79042ef361133a0b4a67b81b9a96859ee113f59ea4554f9075d93
+            kind: images_only
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-18.3911, 28.2594]
+          - relpath: cand01_labels_best.pt
+            sha256: f3ee0294c21908b81f1f95bd86d52248c68c114cd5d99eb93c700c00ceb2f336
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: []
+      - parts:
+          - relpath: cand02_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1tYEN1Fl2Nn5xSk5KhpT2_suUSJQ8TCU9
+          - relpath: cand03_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=11V26firhkGsJ9OJvKt0gPE0fNItXFLiR
+        ipc: 10
+        evidence:
+          - relpath: cand02_images_best.pt
+            sha256: eac8d1d5d20709b98bf16b8eb813ceb01af64177f7ed6063173bf822140c76d2
+            kind: images_only
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-8.2016, 10.3761]
+          - relpath: cand03_labels_best.pt
+            sha256: f76c6abb3f46c92c5892f2d6a7c545fba95b816608611d756bf0680c7e3adeff
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: []
+      - parts:
+          - relpath: cand04_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1-3__FMR91YU7gZTV9I7ZTu5lEUOqosrm
+          - relpath: cand05_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1A4Tiq1Ph8jrsZMRDJWdVC8qr-6ZvqEpG
+        ipc: 50
+        evidence:
+          - relpath: cand04_images_best.pt
+            sha256: cbb8076f471afe40aa791d0cf45a049b587336a92539f3b2f639d4ae33c1b34c
+            kind: images_only
+            n_images: 5000
+            image_shape: [5000, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-17.3901, 15.162]
+          - relpath: cand05_labels_best.pt
+            sha256: c9d5672e4daa8e36a41016644955fedcb5fe84f464b867dc832510b0bec00150
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50, "10": 50, "11": 50, "12": 50, "13": 50, "14": 50, "15": 50, "16": 50, "17": 50, "18": 50, "19": 50, "20": 50, "21": 50, "22": 50, "23": 50, "24": 50, "25": 50, "26": 50, "27": 50, "28": 50, "29": 50, "30": 50, "31": 50, "32": 50, "33": 50, "34": 50, "35": 50, "36": 50, "37": 50, "38": 50, "39": 50, "40": 50, "41": 50, "42": 50, "43": 50, "44": 50, "45": 50, "46": 50, "47": 50, "48": 50, "49": 50, "50": 50, "51": 50, "52": 50, "53": 50, "54": 50, "55": 50, "56": 50, "57": 50, "58": 50, "59": 50, "60": 50, "61": 50, "62": 50, "63": 50, "64": 50, "65": 50, "66": 50, "67": 50, "68": 50, "69": 50, "70": 50, "71": 50, "72": 50, "73": 50, "74": 50, "75": 50, "76": 50, "77": 50, "78": 50, "79": 50, "80": 50, "81": 50, "82": 50, "83": 50, "84": 50, "85": 50, "86": 50, "87": 50, "88": 50, "89": 50, "90": 50, "91": 50, "92": 50, "93": 50, "94": 50, "95": 50, "96": 50, "97": 50, "98": 50, "99": 50}
+            value_range: []
+    status: fetched
+    notes: >
+      Released as "TM" inside DC-BENCH; method identity is MTT (Cazenavette
+      et al., CVPR 2022). Separate images/labels blobs per IPC, assembled as
+      multi-part artifacts at ingest.
+
+  - source_id: dcbench.random
+    release_lineage: dcbench2022_baselines
+    method: Random
+    method_family: selection_family
+    distribution: dcbench
+    dataset: cifar100
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: zscore
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_CIFAR100_IPC1_normalize_images.pt: 19379cda54a78d38d06cbf480b47683f47084fd8e925b75d4be484ec955a4332
+      cand01_CIFAR100_IPC1_normalize_labels.pt: d61f58fb27d01627fc89cf258ba5ed925fab9ed454de7103237e0157b5df94da
+      cand02_CIFAR100_IPC10_normalize_images.pt: 7c170922644557d34d90d13756e187b75c9c9c6df73ffe215f13161edc914989
+      cand03_CIFAR100_IPC10_normalize_labels.pt: 6c50e8d505aa42b01daf5d9d017a40d9d1236ea470142497e5fba1721b28f306
+      cand04_CIFAR100_IPC50_normalize_images.pt: 5b230fb4520c3df38bc12398dbfbd902c6975b9f018eb1232ece5c1474ceb01e
+      cand05_CIFAR100_IPC50_normalize_labels.pt: 62fb31e424ce9575172d0f9fe20a75c5168a0d38cc898ee466460e51c8ed3531
+    files:
+      - parts:
+          - relpath: cand00_CIFAR100_IPC1_normalize_images.pt
+            role: images
+            url: https://drive.google.com/uc?id=12iXeL9ruMP0xq0M7ilvgBEuj8s2z-dXY
+          - relpath: cand01_CIFAR100_IPC1_normalize_labels.pt
+            role: labels
+            url: https://drive.google.com/uc?id=19LqygHoa6kddIBqSlFiYV85ZxzPgxlb7
+        ipc: 1
+        evidence:
+          - relpath: cand00_CIFAR100_IPC1_normalize_images.pt
+            sha256: 19379cda54a78d38d06cbf480b47683f47084fd8e925b75d4be484ec955a4332
+            kind: images_only
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-1.8978, 2.0243]
+          - relpath: cand01_CIFAR100_IPC1_normalize_labels.pt
+            sha256: d61f58fb27d01627fc89cf258ba5ed925fab9ed454de7103237e0157b5df94da
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: []
+      - parts:
+          - relpath: cand02_CIFAR100_IPC10_normalize_images.pt
+            role: images
+            url: https://drive.google.com/uc?id=1JYl-hwUv3Y8cWkpCb0ANrcc8d12clBK9
+          - relpath: cand03_CIFAR100_IPC10_normalize_labels.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1d8al8kK7yIsXctjdt_TpANgHly4u6Z-k
+        ipc: 10
+        evidence:
+          - relpath: cand02_CIFAR100_IPC10_normalize_images.pt
+            sha256: 7c170922644557d34d90d13756e187b75c9c9c6df73ffe215f13161edc914989
+            kind: images_only
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-1.8978, 2.0243]
+          - relpath: cand03_CIFAR100_IPC10_normalize_labels.pt
+            sha256: 6c50e8d505aa42b01daf5d9d017a40d9d1236ea470142497e5fba1721b28f306
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: []
+      - parts:
+          - relpath: cand04_CIFAR100_IPC50_normalize_images.pt
+            role: images
+            url: https://drive.google.com/uc?id=1hFmz-ycaJMcoIlhNbIOcRbVcbo9hYafn
+          - relpath: cand05_CIFAR100_IPC50_normalize_labels.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1mIglSwH3ZHEM6TMao3KgzJYPur1dKSSL
+        ipc: 50
+        evidence:
+          - relpath: cand04_CIFAR100_IPC50_normalize_images.pt
+            sha256: 5b230fb4520c3df38bc12398dbfbd902c6975b9f018eb1232ece5c1474ceb01e
+            kind: images_only
+            n_images: 5000
+            image_shape: [5000, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-1.8978, 2.0243]
+          - relpath: cand05_CIFAR100_IPC50_normalize_labels.pt
+            sha256: 62fb31e424ce9575172d0f9fe20a75c5168a0d38cc898ee466460e51c8ed3531
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50, "10": 50, "11": 50, "12": 50, "13": 50, "14": 50, "15": 50, "16": 50, "17": 50, "18": 50, "19": 50, "20": 50, "21": 50, "22": 50, "23": 50, "24": 50, "25": 50, "26": 50, "27": 50, "28": 50, "29": 50, "30": 50, "31": 50, "32": 50, "33": 50, "34": 50, "35": 50, "36": 50, "37": 50, "38": 50, "39": 50, "40": 50, "41": 50, "42": 50, "43": 50, "44": 50, "45": 50, "46": 50, "47": 50, "48": 50, "49": 50, "50": 50, "51": 50, "52": 50, "53": 50, "54": 50, "55": 50, "56": 50, "57": 50, "58": 50, "59": 50, "60": 50, "61": 50, "62": 50, "63": 50, "64": 50, "65": 50, "66": 50, "67": 50, "68": 50, "69": 50, "70": 50, "71": 50, "72": 50, "73": 50, "74": 50, "75": 50, "76": 50, "77": 50, "78": 50, "79": 50, "80": 50, "81": 50, "82": 50, "83": 50, "84": 50, "85": 50, "86": 50, "87": 50, "88": 50, "89": 50, "90": 50, "91": 50, "92": 50, "93": 50, "94": 50, "95": 50, "96": 50, "97": 50, "98": 50, "99": 50}
+            value_range: []
+    status: fetched
+    notes: >
+      Random real-image selection baseline officially released by DC-BENCH.
+      Stored z-scored; inverted with the pinned CIFAR-100 constants verified
+      in runs/cifar100/auditbench_e2/zscore_inversion_verification.json.
+
+  - source_id: vico.dc
+    release_lineage: dc_zhao2021_iccv
+    method: DC
+    method_family: gradient_family
+    distribution: vico_dataset_condensation
+    dataset: cifar100
+    ipcs: [1, 10]
+    source_tier: 2
+    official_urls:
+      - https://github.com/VICO-UoE/DatasetCondensation
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DC_CIFAR100_ConvNet_1ipc.pt: 2ae0991a91541c68a0d89fd7a77eeb2643f25adf55aea7a9df0060d681154fe8
+      cand01_res_DC_CIFAR100_ConvNet_10ipc.pt: 559a05cd1b674871a9cfe66458574e453f2dc9b60ef42d37b76c28bf408ae7b9
+    files:
+      - relpath: cand00_res_DC_CIFAR100_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1dRX_edcX4BXKpYkMmftcGJHe2_8y7SxY
+        evidence:
+          - relpath: cand00_res_DC_CIFAR100_ConvNet_1ipc.pt
+            sha256: 2ae0991a91541c68a0d89fd7a77eeb2643f25adf55aea7a9df0060d681154fe8
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: [-6.1204, 5.7711]
+      - relpath: cand01_res_DC_CIFAR100_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1ppsIicfFLR-lWA_KmuvedP93ELTaecq3
+        evidence:
+          - relpath: cand01_res_DC_CIFAR100_ConvNet_10ipc.pt
+            sha256: 559a05cd1b674871a9cfe66458574e453f2dc9b60ef42d37b76c28bf408ae7b9
+            kind: checkpoint_list
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-8.5874, 7.5152]
+    status: fetched
+    notes: >
+      Authors' original release of DC. The VICO CIFAR-100 drive subtree
+      (measured 2026-09-05) contains IPC1/IPC10 only; no IPC50.
+
+  - source_id: vico.dsa
+    release_lineage: dsa_zhao2021_iccvw
+    method: DSA
+    method_family: gradient_family
+    distribution: vico_dataset_condensation
+    dataset: cifar100
+    ipcs: [1, 10]
+    source_tier: 2
+    official_urls:
+      - https://github.com/VICO-UoE/DatasetCondensation
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DSA_CIFAR100_ConvNet_1ipc.pt: 92ac4bb72302d78d23df128795ebfb60fb586c51e8a9a93661e91c8200f3f4ca
+      cand01_res_DSA_CIFAR100_ConvNet_10ipc.pt: 27c899c82926d31b130581487cf5b2fee3f7db3e8271860eb65f4102991cff54
+    files:
+      - relpath: cand00_res_DSA_CIFAR100_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=10DtMp701enEJP-ZacS5mDGrQ0L-JZDBO
+        evidence:
+          - relpath: cand00_res_DSA_CIFAR100_ConvNet_1ipc.pt
+            sha256: 92ac4bb72302d78d23df128795ebfb60fb586c51e8a9a93661e91c8200f3f4ca
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: [-5.8406, 5.8086]
+      - relpath: cand01_res_DSA_CIFAR100_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1uvtdOiFVCpMHykvVPqSAw4kd54JpJOcv
+        evidence:
+          - relpath: cand01_res_DSA_CIFAR100_ConvNet_10ipc.pt
+            sha256: 27c899c82926d31b130581487cf5b2fee3f7db3e8271860eb65f4102991cff54
+            kind: checkpoint_list
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-5.9941, 6.3586]
+    status: fetched
+    notes: >
+      Authors' original release of DSA. The VICO CIFAR-100 drive subtree
+      (measured 2026-09-05) contains IPC1/IPC10 only; no IPC50.
+
+  - source_id: idc.idc
+    release_lineage: idc_kim2022_icml
+    method: IDC
+    method_family: parameterization_family
+    distribution: efficient_dataset_condensation
+    dataset: cifar100
+    ipcs: [10]
+    source_tier: 2
+    official_urls:
+      - https://github.com/snu-mllab/Efficient-Dataset-Condensation
+    label_type_expected: unknown
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_data.pt: 743184f73d475424893082019c02a9f94cf06187d1aa9ca75aa4fe9483e22bc6
+    files:
+      - relpath: cand00_data.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1V9ejqqy0Hi0lqqDNoSU1Gym-MeZTiYxD
+        evidence:
+          - relpath: cand00_data.pt
+            sha256: 743184f73d475424893082019c02a9f94cf06187d1aa9ca75aa4fe9483e22bc6
+            kind: combined
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-0.0124, 1.013]
+    status: fetched
+    notes: >
+      IDC (ICML 2022) official release. The IDC CIFAR-100 drive subtree
+      (measured 2026-09-05) contains IPC10 and IPC20 runs only; IPC20 is not
+      a target IPC. The registered run is the same configuration family as
+      the E0 CIFAR-10 registration (conv3in factor1 random). Label type is
+      decided by QC at ingest; soft labels are never argmaxed.
+
+  - source_id: datadam.datadam
+    release_lineage: datadam_sajedi2023_iccv
+    method: DataDAM
+    method_family: attention_family
+    distribution: datadam_official
+    dataset: cifar100
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/DataDistillation/DataDAM
+      - https://huggingface.co/datasets/uoft-dsp-lab/DataDAM
+    label_type_expected: unknown
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_syn_data_cifar100_ipc_1.pt: 6d259a30d63312c06dbdd935286e162c2b297d7b56bddb4b68419fc5eaec2033
+      cand01_syn_data_cifar100_ipc_10.pt: 070ad94f68640c040ee0d03f02e24c67ee9e6a95821955b3fc50fe325ec48880
+      cand02_syn_data_cifar100_ipc_50.pt: ed819776e00bf42e62a4e2ab0f0c03a2ba6d5dc7a237aeae45377e2adad1de53
+    files:
+      - relpath: cand00_syn_data_cifar100_ipc_1.pt
+        ipc: 1
+        url: https://huggingface.co/datasets/uoft-dsp-lab/DataDAM/resolve/main/cifar100/syn_data_cifar100_ipc_1.pt
+        evidence:
+          - relpath: cand00_syn_data_cifar100_ipc_1.pt
+            sha256: 6d259a30d63312c06dbdd935286e162c2b297d7b56bddb4b68419fc5eaec2033
+            kind: combined
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1, "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "47": 1, "48": 1, "49": 1, "50": 1, "51": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "58": 1, "59": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "67": 1, "68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1, "75": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "87": 1, "88": 1, "89": 1, "90": 1, "91": 1, "92": 1, "93": 1, "94": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1}
+            value_range: [-7.779, 7.463]
+      - relpath: cand01_syn_data_cifar100_ipc_10.pt
+        ipc: 10
+        url: https://huggingface.co/datasets/uoft-dsp-lab/DataDAM/resolve/main/cifar100/syn_data_cifar100_ipc_10.pt
+        evidence:
+          - relpath: cand01_syn_data_cifar100_ipc_10.pt
+            sha256: 070ad94f68640c040ee0d03f02e24c67ee9e6a95821955b3fc50fe325ec48880
+            kind: combined
+            n_images: 1000
+            image_shape: [1000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10, "10": 10, "11": 10, "12": 10, "13": 10, "14": 10, "15": 10, "16": 10, "17": 10, "18": 10, "19": 10, "20": 10, "21": 10, "22": 10, "23": 10, "24": 10, "25": 10, "26": 10, "27": 10, "28": 10, "29": 10, "30": 10, "31": 10, "32": 10, "33": 10, "34": 10, "35": 10, "36": 10, "37": 10, "38": 10, "39": 10, "40": 10, "41": 10, "42": 10, "43": 10, "44": 10, "45": 10, "46": 10, "47": 10, "48": 10, "49": 10, "50": 10, "51": 10, "52": 10, "53": 10, "54": 10, "55": 10, "56": 10, "57": 10, "58": 10, "59": 10, "60": 10, "61": 10, "62": 10, "63": 10, "64": 10, "65": 10, "66": 10, "67": 10, "68": 10, "69": 10, "70": 10, "71": 10, "72": 10, "73": 10, "74": 10, "75": 10, "76": 10, "77": 10, "78": 10, "79": 10, "80": 10, "81": 10, "82": 10, "83": 10, "84": 10, "85": 10, "86": 10, "87": 10, "88": 10, "89": 10, "90": 10, "91": 10, "92": 10, "93": 10, "94": 10, "95": 10, "96": 10, "97": 10, "98": 10, "99": 10}
+            value_range: [-3.4003, 4.1228]
+      - relpath: cand02_syn_data_cifar100_ipc_50.pt
+        ipc: 50
+        url: https://huggingface.co/datasets/uoft-dsp-lab/DataDAM/resolve/main/cifar100/syn_data_cifar100_ipc_50.pt
+        evidence:
+          - relpath: cand02_syn_data_cifar100_ipc_50.pt
+            sha256: ed819776e00bf42e62a4e2ab0f0c03a2ba6d5dc7a237aeae45377e2adad1de53
+            kind: combined
+            n_images: 5000
+            image_shape: [5000, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50, "10": 50, "11": 50, "12": 50, "13": 50, "14": 50, "15": 50, "16": 50, "17": 50, "18": 50, "19": 50, "20": 50, "21": 50, "22": 50, "23": 50, "24": 50, "25": 50, "26": 50, "27": 50, "28": 50, "29": 50, "30": 50, "31": 50, "32": 50, "33": 50, "34": 50, "35": 50, "36": 50, "37": 50, "38": 50, "39": 50, "40": 50, "41": 50, "42": 50, "43": 50, "44": 50, "45": 50, "46": 50, "47": 50, "48": 50, "49": 50, "50": 50, "51": 50, "52": 50, "53": 50, "54": 50, "55": 50, "56": 50, "57": 50, "58": 50, "59": 50, "60": 50, "61": 50, "62": 50, "63": 50, "64": 50, "65": 50, "66": 50, "67": 50, "68": 50, "69": 50, "70": 50, "71": 50, "72": 50, "73": 50, "74": 50, "75": 50, "76": 50, "77": 50, "78": 50, "79": 50, "80": 50, "81": 50, "82": 50, "83": 50, "84": 50, "85": 50, "86": 50, "87": 50, "88": 50, "89": 50, "90": 50, "91": 50, "92": 50, "93": 50, "94": 50, "95": 50, "96": 50, "97": 50, "98": 50, "99": 50}
+            value_range: [-2.5542, 2.9193]
+    status: fetched
+    notes: >
+      DataDAM (ICCV 2023) attention matching, official HuggingFace release;
+      cifar100/ subtree (measured 2026-09-05) contains IPC1/10/50.

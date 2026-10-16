@@ -1,0 +1,44 @@
+# CPU-only, network-free configuration for import and proxy smoke checks.
+experiment: smoke
+seed: 0
+device: cpu
+output_dir: runs/_smoke
+
+dataset:
+  name: fake
+  root: data
+  image_size: 32
+  num_workers: 0
+  download: false
+  fake_train_size: 40
+  fake_test_size: 20
+
+backbone:
+  latent_channels: 4
+  width: 8
+  embed_dim: 16
+  ae_epochs: 1
+  diffusion_epochs: 1
+  batch_size: 8
+  validation_fraction: 0.2
+  validation_batches: 1
+
+trajectory:
+  diffusion_steps: 10
+  timesteps: [9, 4, 0]
+  inference_steps: 2
+
+topology:
+  max_points_per_class: 4
+  signature_size: 3
+
+distill:
+  ipc: 2
+  steps: 1
+  log_every: 1
+
+evaluation:
+  architectures: [convnet]
+  epochs: 1
+  batch_size: 8
+  seeds: [0]

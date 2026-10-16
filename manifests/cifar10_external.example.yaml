@@ -1,0 +1,45 @@
+# Example manifest for the AuditBench-DD external bank (schema reference).
+# Copy this structure when registering a new official source. Every field is
+# required unless marked optional. Never infer metadata from file names.
+
+version: 1
+dataset: cifar10
+
+taxonomy:  # pre-frozen method_family values; extend only via a new iteration
+  - selection_family
+  - gradient_family
+  - distribution_family
+  - trajectory_family
+  - kernel_family
+  - parameterization_family
+  - attention_family
+  - generative_family
+
+sources:
+  - source_id: example_official.examplemethod   # unique, distribution.method
+    release_lineage: example_doe2024_conf       # one per independent paper
+    method: ExampleMethod
+    method_family: gradient_family              # must be in taxonomy
+    distribution: example_official_repo         # which official release
+    dataset: cifar10
+    ipcs: [10, 50]                              # IPCs this source provides
+    source_tier: 2                              # 1..5, see provenance.py
+    official_urls:
+      - https://example.org/authors/repo        # landing page (always)
+      - https://example.org/authors/data.zip    # direct artifact (optional)
+    label_type_expected: hard                   # hard | soft | unknown
+    preprocessing_expected: raw                 # raw | zca | normalized | generator | unknown
+    license: MIT (verified 2026-01-01)
+    # Pin hashes after first fetch from a tier 1-4 source (trust on first
+    # fetch); tier 5 mirrors are rejected unless the hash is pinned here.
+    pinned_sha256:
+      ipc10/images.pt: 0123abcd...              # relpath -> sha256
+    # Explicit blob -> IPC map. Required before ingestion; the pipeline never
+    # guesses IPC/method/seed from paths.
+    files:
+      - relpath: ipc10/images.pt
+        ipc: 10
+      - relpath: ipc50/images.pt
+        ipc: 50
+    status: pending_fetch
+    notes: Human-auditable context (release page, variant caveats, REPRODUCED).

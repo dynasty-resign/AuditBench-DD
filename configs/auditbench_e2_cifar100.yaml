@@ -1,0 +1,38 @@
+﻿# AuditBench-DD E2a: CIFAR-100 official external candidate bank construction.
+# Same E0-homologous pipeline as configs/auditbench_e0_cifar10.yaml, run with
+# stage name auditbench_e2a. This stage only builds/audits/normalizes data;
+# it never trains students and never compares proxies against utility.
+dataset: cifar100
+stage: auditbench_e2a
+num_classes: 100
+image_size: 32
+
+manifest_path: manifests/cifar100_external_sources.yaml
+raw_dir: external/cifar100/raw        # downloaded/staged blobs (git-ignored)
+out_dir: external/cifar100            # canonical bank + bank_index.json
+report_path: runs/cifar100/auditbench_e2/e2a_report.json
+e1_protocol_path: runs/cifar100/auditbench_e2/e2a_protocol_frozen.json
+resolved_manifest_path: runs/cifar100/auditbench_e2/manifest_resolved.yaml
+
+fetch_enabled: true
+fetch_timeout_sec: 120
+fetch_retries: 2
+
+primary_ipcs: [10, 50]   # E2 primary cohort
+extreme_ipcs: [1]        # registered, excluded from coverage gates
+
+# Pre-frozen gate thresholds (identical structure to the E0 frozen values;
+# the E2a GATE decision itself uses the two-condition threshold fixed in the
+# E2 pre-registration: primary_entries >= 12 AND families >= 4, derived from
+# pass_strong.min_primary_entries + pass_minimum.min_families).
+gate_thresholds:
+  pass_strong:
+    min_lineages: 6
+    min_families: 6
+    min_dual_ipc_lineages: 4
+    min_primary_entries: 12
+  pass_minimum:
+    min_lineages: 4
+    min_families: 4
+    min_dual_ipc_lineages: 3
+    min_primary_entries: 8

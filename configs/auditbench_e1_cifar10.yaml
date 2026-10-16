@@ -1,0 +1,96 @@
+# AuditBench-DD E1: external blind test of training-free proxy scores against
+# hard-label student utility on the official CIFAR-10 candidate bank.
+#
+# This config is the ExperimentConfig-compatible execution config for the E1
+# embedding backbone (Phase-1 two-stage backbone trained ONLY on official
+# CIFAR-10 train, blind to all candidate sets) and for E1 smoke/formal runs.
+# The machine-readable frozen protocol lives in
+# runs/cifar10/auditbench_e1/e1_preregistration.json (derived; frozen before
+# any E1 utility measurement) and is documented in docs/AUDITBENCH_E1.md.
+experiment: cifar10/auditbench_e1
+seed: 0
+device: auto
+output_dir: runs
+
+dataset:
+  name: cifar10
+  root: data
+  image_size: 32
+  num_workers: 4
+  download: true
+
+backbone:
+  # Phase-1 protocol, identical capacity/budget to configs/cifar10.yaml.
+  # Trained on official CIFAR-10 train only; never sees candidate artifacts.
+  latent_channels: 8
+  width: 64
+  embed_dim: 128
+  ae_epochs: 50
+  diffusion_epochs: 100
+  ae_lr: 0.0002
+  diffusion_lr: 0.0002
+  batch_size: 128
+  checkpoint: runs/cifar10/auditbench_e1/backbone.pt
+  condition_dropout: 0.1
+  semantic_weight: 0.1
+  ema_decay: 0.999
+  validation_fraction: 0.1
+  validation_batches: 10
+  noise_mse_target: 0.8
+  use_ema: true
+
+trajectory:
+  diffusion_steps: 1000
+  timesteps: [999, 749, 499, 249, 0]
+  beta_start: 0.0001
+  beta_end: 0.02
+  space: latent
+  direction: reverse
+  conditioning: unconditional
+  source: inversion
+  representation: predicted_clean
+  inference_steps: 50
+  noise_repeats: 1
+
+topology:
+  max_points_per_class: 64
+  signature_size: 32
+  metric: cosine
+  homology_dim: 0
+  pairs_per_step: 4
+
+distill:
+  method: ttd
+  ipc: 10
+  steps: 2000
+  lr: 0.05
+  lambda_feature: 1.0
+  lambda_topology: 1.0
+  feature_covariance: true
+  init: real
+  log_every: 50
+
+evaluation:
+  # Frozen E1 student-training budget (derived, pre-registered): identical to
+  # configs/cifar10.yaml defaults used by the historical Card C / C-v2
+  # internal evaluations. Not reduced, so no reduction rationale is needed;
+  # these values may NOT be re-tuned in the formal E1 round.
+  architectures: [convnet, resnet18, vgg11, mobilenet_v2]
+  epochs: 200
+  batch_size: 128
+  lr: 0.1
+  weight_decay: 0.0005
+  seeds: [0, 1, 2]
+  probe_views: 8
+  probe_max_iter: 500
+
+feasibility:
+  sample_count: 10000
+  train_fraction: 0.8
+  split_seeds: [0, 1, 2, 3, 4]
+  topology_neighbors: 16
+  topology_jobs: 1
+  dimension_matched_probe: true
+  visualization_samples: 500
+  exact_ph_max_dim: 1
+  topology_curve_bins: 50

@@ -1,0 +1,108 @@
+# AuditBench-DD E5: pre-registered execution config for the imagenette external blind test
+# of training-free proxy scores against hard-label student utility (cohort filled
+# mechanically in iter-0009 under the two-phase lock; frozen protocol in
+# runs/imagenette/auditbench_e5/e5_preregistration.json, sha16 8283d09ec4425f90).
+#
+# ExperimentConfig-compatible execution config for the E5 embedding backbone
+# (Phase-1 two-stage, trained ONLY on official imagenette train at 64px, blind to all
+# candidate sets) and for E5 smoke runs. All evaluation budget values are the
+# E1/E2/E3/E4 frozen values carried over unchanged.
+experiment: imagenette/auditbench_e5
+seed: 0
+device: auto
+output_dir: runs
+
+dataset:
+  name: imagenette
+  root: data
+  image_size: 64
+  num_workers: 4
+  download: false
+  # iter-0009 T5 measured z-score pin on the official imagenette train split at the
+  # frozen 64px evaluation resolution (float64 accumulation, full enumeration;
+  # evidence runs/evidence_packs/iter0009_e5a/zscore_pin/zscore_pin.json). The
+  # authoritative runtime values are registered at runtime by
+  # scripts/iter0009/e5_runtime.py from that pin JSON (the iter-0009
+  # allowed-change set excludes src/; zero src bytes changed).
+  # zscore_pin (comment block; measured T5, full enumeration, no seed):
+  #   mean: [0.462539, 0.457966, 0.429880]
+  #   std: [0.269210, 0.265794, 0.289607]
+  #   n_images: 9469, accumulation_dtype: float64, full enumeration
+  #   measured_at_utc: 2026-09-08T07:18:53Z, constants_sha16: facd2e2a96712e4c
+
+backbone:
+  # Phase-1 protocol isomorphic to E1/E2/E3/E4; capacity/budget identical to the
+  # E3/E4 64px backbone. Trained on official imagenette train only; never sees
+  # candidate artifacts.
+  latent_channels: 16
+  width: 96
+  embed_dim: 256
+  ae_epochs: 100
+  diffusion_epochs: 200
+  ae_lr: 0.0002
+  diffusion_lr: 0.0002
+  batch_size: 128
+  checkpoint: runs/imagenette/auditbench_e5/backbone.pt
+  condition_dropout: 0.1
+  semantic_weight: 0.1
+  ema_decay: 0.999
+  validation_fraction: 0.1
+  validation_batches: 10
+  noise_mse_target: 0.8
+  use_ema: true
+
+trajectory:
+  diffusion_steps: 1000
+  timesteps: [999, 749, 499, 249, 0]
+  beta_start: 0.0001
+  beta_end: 0.02
+  space: latent
+  direction: reverse
+  conditioning: unconditional
+  source: inversion
+  representation: predicted_clean
+  inference_steps: 100
+  noise_repeats: 1
+
+topology:
+  max_points_per_class: 64
+  signature_size: 32
+  metric: cosine
+  homology_dim: 0
+  pairs_per_step: 4
+
+distill:
+  method: ttd
+  ipc: 10
+  steps: 2000
+  lr: 0.05
+  lambda_feature: 1.0
+  lambda_topology: 1.0
+  feature_covariance: true
+  init: real
+  log_every: 50
+
+evaluation:
+  # Frozen E5 student-training budget: identical to the E1/E2/E3/E4 frozen values
+  # (200ep / batch 128 / lr 0.1 / wd 5e-4 / seeds [0,1,2]); carried over unchanged
+  # and not re-tunable in the formal E5 round. 64px convergence calibration clause:
+  # see the pre-registration training_budget and the append-only budget addendum.
+  architectures: [convnet, resnet18, vgg11, mobilenet_v2]
+  epochs: 200
+  batch_size: 128
+  lr: 0.1
+  weight_decay: 0.0005
+  seeds: [0, 1, 2]
+  probe_views: 8
+  probe_max_iter: 500
+
+feasibility:
+  sample_count: 10000
+  train_fraction: 0.8
+  split_seeds: [0, 1, 2, 3, 4]
+  topology_neighbors: 16
+  topology_jobs: 1
+  dimension_matched_probe: true
+  visualization_samples: 500
+  exact_ph_max_dim: 1
+  topology_curve_bins: 50

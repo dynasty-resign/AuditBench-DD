@@ -1,0 +1,923 @@
+# AuditBench-DD E0 - CIFAR-10 external condensed-set source registry.
+#
+# Only official public sources are accepted. Source tiers (task-fixed order):
+#   1 author project page release | 2 author official repo artifact
+#   3 DC-BENCH official repo/package | 4 REPRODUCED with pinned commit
+#   5 community mirror (requires pinned SHA-256 matching a tier 1-3 reference)
+#
+# Verification state machine (field `status`):
+#   pending_url_verification -> human must confirm the official URL first
+#   pending_fetch            -> URL registered, nothing downloaded yet
+#   fetched/hash_verified/ingested -> set by the pipeline after each stage
+#   rejected_*               -> set by the pipeline with a recorded reason
+#
+# `files` maps downloaded blobs to IPC explicitly; the pipeline refuses to
+# infer method/IPC/seed from file or directory names. Empty `files` means the
+# archive layout still has to be mapped by a human after the first download.
+# Repo landing URLs below are registered from the authors' official pages as
+# of 2026-09; per-file data URLs and SHA-256 are pinned at first fetch.
+# 2026-09-05 (iter-0002): DC-BENCH repo URL corrected from
+# github.com/justincui03/dcbench (HTTP 404) to
+# github.com/justincui03/dc_benchmark, whose README (commit
+# 2a57711961670859ea4c3102b766d1b16f7dea85) states it is the official
+# codebase for the DC-BENCH paper (arXiv:2207.09639).
+
+version: 1
+dataset: cifar10
+
+# Pre-frozen method_family taxonomy (E0 task). Values, not code, carry this.
+taxonomy:
+  - selection_family
+  - gradient_family
+  - distribution_family
+  - trajectory_family
+  - kernel_family
+  - parameterization_family
+  - attention_family
+  - generative_family
+
+sources:
+  - source_id: dcbench.dc
+    release_lineage: dc_zhao2021_iccv
+    method: DC
+    method_family: gradient_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DC_CIFAR10_ConvNet_1ipc.pt: 40c3a17df89ca89cc46a424f51eb94137fc4d857133d9f3f92f1bac2a473c553
+      cand01_res_DC_CIFAR10_ConvNet_10ipc.pt: d88de0fce7b2be1cffd1d17ebb1bb903bccb8d04a9016ec1403a5e252148120f
+      cand02_res_DC_CIFAR10_ConvNet_50ipc.pt: 21a681418ca34f52f108e46b7296055ebcc385e2aa2ea73d17e6518c2b7e4944
+    files:
+      - relpath: cand00_res_DC_CIFAR10_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1WDodZxy29NtuxGsHVGhpidLwqVX6YUa1
+        evidence:
+          - relpath: cand00_res_DC_CIFAR10_ConvNet_1ipc.pt
+            sha256: 40c3a17df89ca89cc46a424f51eb94137fc4d857133d9f3f92f1bac2a473c553
+            kind: checkpoint_list
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-5.7878, 4.5526]
+      - relpath: cand01_res_DC_CIFAR10_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1izyEP7cnIWXuhyyZQXA8VEC9syh5h4Um
+        evidence:
+          - relpath: cand01_res_DC_CIFAR10_ConvNet_10ipc.pt
+            sha256: d88de0fce7b2be1cffd1d17ebb1bb903bccb8d04a9016ec1403a5e252148120f
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-7.1473, 6.181]
+      - relpath: cand02_res_DC_CIFAR10_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1niYNlzzQu_a_4HBhkeI27_5ZWr26FN3i
+        evidence:
+          - relpath: cand02_res_DC_CIFAR10_ConvNet_50ipc.pt
+            sha256: 21a681418ca34f52f108e46b7296055ebcc385e2aa2ea73d17e6518c2b7e4944
+            kind: checkpoint_list
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-8.2143, 7.7173]
+    status: ingested
+    notes: >
+      DC-BENCH official release (NeurIPS 2022 D&B). Condensed tensors linked
+      from the official repo README; pin the exact archive URL and hash at
+      first fetch. ZCA-preprocessed variants, when present, are registered as
+      separate zca_only stratum entries, never mixed into primary.
+
+  - source_id: dcbench.dsa
+    release_lineage: dsa_zhao2021_iccvw
+    method: DSA
+    method_family: gradient_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DSA_CIFAR10_ConvNet_1ipc.pt: bc23a3aca5443d289c12540e4b0637bfbb3a8f52878f7e7f7c7cb5f7ca5f7d08
+      cand01_res_DSA_CIFAR10_ConvNet_10ipc.pt: 6b37fa7cd4df6f004023d601cc8ad3ca534362a10c8ea42afcd6a701b165398c
+      cand02_res_DSA_CIFAR10_ConvNet_50ipc.pt: 7ead7a4bc479ff7d4c33a296aa6c75cbfd2cea2915c4b2ef8eebca9f558e1031
+    files:
+      - relpath: cand00_res_DSA_CIFAR10_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1lrV3TMQh5Y0nvZF5qDdJwBhg1fgjt8NV
+        evidence:
+          - relpath: cand00_res_DSA_CIFAR10_ConvNet_1ipc.pt
+            sha256: bc23a3aca5443d289c12540e4b0637bfbb3a8f52878f7e7f7c7cb5f7ca5f7d08
+            kind: checkpoint_list
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-5.7643, 6.7743]
+      - relpath: cand01_res_DSA_CIFAR10_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1zXO_7_Ks-th0ck9GGyYSrONQTMey_NT4
+        evidence:
+          - relpath: cand01_res_DSA_CIFAR10_ConvNet_10ipc.pt
+            sha256: 6b37fa7cd4df6f004023d601cc8ad3ca534362a10c8ea42afcd6a701b165398c
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-5.8822, 5.2341]
+      - relpath: cand02_res_DSA_CIFAR10_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1boTt8j-uaIdF1-I_kP4aEZ3ShLkD4A7m
+        evidence:
+          - relpath: cand02_res_DSA_CIFAR10_ConvNet_50ipc.pt
+            sha256: 7ead7a4bc479ff7d4c33a296aa6c75cbfd2cea2915c4b2ef8eebca9f558e1031
+            kind: checkpoint_list
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-5.5453, 4.333]
+    status: ingested
+    notes: Differentiable Siamese Augmentation; independent paper lineage.
+
+  - source_id: dcbench.dm
+    release_lineage: dm_zhao2023_wacv
+    method: DM
+    method_family: distribution_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DM_CIFAR10_ConvNet_1ipc.pt: de488a2d0213b70c65876e9067b41a440edec033ebfb5cc0345549f5e7f15000
+      cand01_res_DM_CIFAR10_ConvNet_10ipc.pt: 2efbf49fcfcc5390429de0df267c7765e2351fd853c8c7f3da53ebe9d3e98882
+      cand02_res_DM_CIFAR10_ConvNet_50ipc.pt: b3a64949ef0046694e80d26bd38dbcc1666e33d0933d2e4344ee924afad6aec5
+    files:
+      - relpath: cand00_res_DM_CIFAR10_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1xFZbBpahYAklBv7viKL9kEDUurrTwdrF
+        evidence:
+          - relpath: cand00_res_DM_CIFAR10_ConvNet_1ipc.pt
+            sha256: de488a2d0213b70c65876e9067b41a440edec033ebfb5cc0345549f5e7f15000
+            kind: checkpoint_list
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-35.3764, 29.2587]
+      - relpath: cand01_res_DM_CIFAR10_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1bEgvHyW8K_omttsFF40l7UFtho726UIC
+        evidence:
+          - relpath: cand01_res_DM_CIFAR10_ConvNet_10ipc.pt
+            sha256: 2efbf49fcfcc5390429de0df267c7765e2351fd853c8c7f3da53ebe9d3e98882
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-5.7077, 6.3521]
+      - relpath: cand02_res_DM_CIFAR10_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1abU9lhu9DY9O3JQHcXI_yaNaMFGiv77n
+        evidence:
+          - relpath: cand02_res_DM_CIFAR10_ConvNet_50ipc.pt
+            sha256: b3a64949ef0046694e80d26bd38dbcc1666e33d0933d2e4344ee924afad6aec5
+            kind: checkpoint_list
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-3.5723, 4.1974]
+    status: ingested
+    notes: Distribution Matching (WACV 2023); independent paper lineage.
+
+  - source_id: dcbench.tm_mtt
+    release_lineage: mtt_cazenavette2022_cvpr
+    method: MTT
+    method_family: trajectory_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_images_best.pt: 38fcd0ab6fe550abb1bb9f1c58b39c53b6a379103483922cbd26fa5958156dfe
+      cand01_labels_best.pt: 83fb342355d674877b81eb2180de3d336eb4304f48a18173d12e48852e30c282
+      cand02_images_best.pt: 0521795ecb314e9101b85a2ff8c32699cabd698aa8e9d2dcbb14a240fd730134
+      cand03_labels_best.pt: f5f08f93ec1d004669e80b8ed50f62e6de20d6a59853916447646b7631fe4f69
+      cand04_images_best.pt: 2401d07dd53ed196e9794903abf0e79f94047982bf203ec211693b583da935d3
+      cand05_labels_best.pt: 2f6c1030e24a9cf80c179a6a702decd7afecef8e2b02fd57b8e0a4e4424cccbf
+    files:
+      - parts:
+          - relpath: cand00_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1jFPedyvdVCLSuqYlS_M5HgHR_sBPVb-v
+          - relpath: cand01_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=16MPNuhEVIgeUpYdfJ8d_ChOo6v9vJDNa
+        ipc: 1
+        evidence:
+          - relpath: cand00_images_best.pt
+            sha256: 38fcd0ab6fe550abb1bb9f1c58b39c53b6a379103483922cbd26fa5958156dfe
+            kind: images_only
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-14.5934, 14.5676]
+          - relpath: cand01_labels_best.pt
+            sha256: 83fb342355d674877b81eb2180de3d336eb4304f48a18173d12e48852e30c282
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: []
+      - parts:
+          - relpath: cand02_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1kbhdvhNQUQ30aqALPs2fBKNqS39CGDC_
+          - relpath: cand03_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1U6H0lwpIlfEAtO8Z25yDPdTblnh4RbL-
+        ipc: 10
+        evidence:
+          - relpath: cand02_images_best.pt
+            sha256: 0521795ecb314e9101b85a2ff8c32699cabd698aa8e9d2dcbb14a240fd730134
+            kind: images_only
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-8.2601, 7.1496]
+          - relpath: cand03_labels_best.pt
+            sha256: f5f08f93ec1d004669e80b8ed50f62e6de20d6a59853916447646b7631fe4f69
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: []
+      - parts:
+          - relpath: cand04_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1fSC1N85_Fn_QQ7p1H8pVpJf3U2ohFs36
+          - relpath: cand05_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1G58YcOrITyO0KpL-AyBuPArcWFTbSDPb
+        ipc: 50
+        evidence:
+          - relpath: cand04_images_best.pt
+            sha256: 2401d07dd53ed196e9794903abf0e79f94047982bf203ec211693b583da935d3
+            kind: images_only
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-10.8344, 9.6783]
+          - relpath: cand05_labels_best.pt
+            sha256: 2f6c1030e24a9cf80c179a6a702decd7afecef8e2b02fd57b8e0a4e4424cccbf
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: []
+    status: ingested
+    notes: >
+      Released as "TM" inside DC-BENCH; method identity is MTT
+      (Cazenavette et al., CVPR 2022). Content dedup against the MTT official
+      release is enforced by SHA-256/content fingerprint, not by name.
+
+  - source_id: dcbench.tm_mtt_zca
+    release_lineage: mtt_cazenavette2022_cvpr
+    method: MTT
+    method_family: trajectory_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [10]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: zca
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_images_best.pt: 1206ccad042dfc5e596ef2edc1ccedb78b218b1b008ab951c98e568c0708407e
+      cand01_labels_best.pt: f5f08f93ec1d004669e80b8ed50f62e6de20d6a59853916447646b7631fe4f69
+    files:
+      - parts:
+          - relpath: cand00_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1aMIOQsSx1CC3-h4qvVV_MBPydj6PodfH
+          - relpath: cand01_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1J5Qw7VgIdlW-v0uG9enOEr4jOErOekmG
+        ipc: 10
+        evidence:
+          - relpath: cand00_images_best.pt
+            sha256: 1206ccad042dfc5e596ef2edc1ccedb78b218b1b008ab951c98e568c0708407e
+            kind: images_only
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-4.1477, 3.4397]
+          - relpath: cand01_labels_best.pt
+            sha256: f5f08f93ec1d004669e80b8ed50f62e6de20d6a59853916447646b7631fe4f69
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: []
+    status: ingested
+    notes: >
+      ZCA-whitened variant of the DC-BENCH "TM" (MTT) CIFAR-10 IPC10 release,
+      distributed as a sibling folder in the official DC-BENCH data drive.
+      Registered for the zca_only stratum; never mixed into the primary
+      cohort and excluded from all coverage gates.
+
+  - source_id: dcbench.kip
+    release_lineage: kip_nguyen2021_iclr
+    method: KIP
+    method_family: kernel_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256: {}
+    files: []
+    status: pending_fetch
+    notes: Kernel Inducing Points (ICLR 2021) as re-released by DC-BENCH.
+
+  - source_id: dcbench.random
+    release_lineage: dcbench2022_baselines
+    method: Random
+    method_family: selection_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: zscore
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_CIFAR10_IPC1_normalize_images.pt: 4b58f5e92d57a02f60caf206664809a1c56e6aa252a0fb0f7ae25eeb189d226c
+      cand01_CIFAR10_IPC1_normalize_labels.pt: 43b80cfa360da7ac86290743424172aabe841728eaea3ca4ba2b90e5951f65c3
+      cand02_CIFAR10_IPC10_normalize_images.pt: 6423e0396e76825b903b47e11b58d64e95b438d31aabcb8d5c2f784ca4ac2ec8
+      cand03_CIFAR10_IPC10_normalize_labels.pt: 583081c9ab67ce0395f3b41d63d3793d6febe8c41b7bb8b2df0812f8a091b220
+      cand04_CIFAR10_IPC50_normalize_images.pt: 604ed11514258cccd66f9a396021b259007f4149e46af8f36d981a2c990236f6
+      cand05_CIFAR10_IPC50_normalize_labels.pt: 14ef7587b70230f7c984ad824249bad3e618bec489f1ec5853ad7eee2fec7136
+    files:
+      - parts:
+          - relpath: cand00_CIFAR10_IPC1_normalize_images.pt
+            role: images
+            url: https://drive.google.com/uc?id=1ZGgNwFY5OG1dkvoQ8HcN4wcmFySl0nLS
+          - relpath: cand01_CIFAR10_IPC1_normalize_labels.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1o9YNqDh4I9KhNhETtOcHm9awvqqBL2Kz
+        ipc: 1
+        evidence:
+          - relpath: cand00_CIFAR10_IPC1_normalize_images.pt
+            sha256: 4b58f5e92d57a02f60caf206664809a1c56e6aa252a0fb0f7ae25eeb189d226c
+            kind: images_only
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-2.4183, 2.7537]
+          - relpath: cand01_CIFAR10_IPC1_normalize_labels.pt
+            sha256: 43b80cfa360da7ac86290743424172aabe841728eaea3ca4ba2b90e5951f65c3
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: []
+      - parts:
+          - relpath: cand02_CIFAR10_IPC10_normalize_images.pt
+            role: images
+            url: https://drive.google.com/uc?id=1_x8hLU-wtFC4-SyQTKnH1-QcyMjruBMg
+          - relpath: cand03_CIFAR10_IPC10_normalize_labels.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1sDDxpTIvTMbknPMLYQLYmbGUbI3RPS7Z
+        ipc: 10
+        evidence:
+          - relpath: cand02_CIFAR10_IPC10_normalize_images.pt
+            sha256: 6423e0396e76825b903b47e11b58d64e95b438d31aabcb8d5c2f784ca4ac2ec8
+            kind: images_only
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-2.4291, 2.7537]
+          - relpath: cand03_CIFAR10_IPC10_normalize_labels.pt
+            sha256: 583081c9ab67ce0395f3b41d63d3793d6febe8c41b7bb8b2df0812f8a091b220
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: []
+      - parts:
+          - relpath: cand04_CIFAR10_IPC50_normalize_images.pt
+            role: images
+            url: https://drive.google.com/uc?id=1BiBSTNTWQxMSQvdZk1d-Ed6oQr9xgAX4
+          - relpath: cand05_CIFAR10_IPC50_normalize_labels.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1mQqmmKC5u0HljobnvExWM9-KUHwrOTTt
+        ipc: 50
+        evidence:
+          - relpath: cand04_CIFAR10_IPC50_normalize_images.pt
+            sha256: 604ed11514258cccd66f9a396021b259007f4149e46af8f36d981a2c990236f6
+            kind: images_only
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-2.4291, 2.7537]
+          - relpath: cand05_CIFAR10_IPC50_normalize_labels.pt
+            sha256: 14ef7587b70230f7c984ad824249bad3e618bec489f1ec5853ad7eee2fec7136
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: []
+    status: ingested
+    notes: Random real-image selection baseline officially released by DC-BENCH.
+
+  - source_id: dcbench.kcenter
+    release_lineage: dcbench2022_baselines
+    method: K-Center
+    method_family: selection_family
+    distribution: dcbench
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 3
+    official_urls:
+      - https://github.com/justincui03/dc_benchmark
+    label_type_expected: hard
+    preprocessing_expected: raw
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256: {}
+    files: []
+    status: pending_fetch
+    notes: >
+      K-Center greedy selection baseline officially released by DC-BENCH.
+      Shares its release lineage with the DC-BENCH baseline package; it is one
+      lineage for statistical clustering, two methods for family coverage.
+
+  - source_id: vico.dc
+    release_lineage: dc_zhao2021_iccv
+    method: DC
+    method_family: gradient_family
+    distribution: vico_dataset_condensation
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/VICO-UoE/DatasetCondensation
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DC_CIFAR10_ConvNet_1ipc.pt: 4f90cb68ff60057ce1aabb02dd3f600d003f92298e2c037e7af0cbf9c0309586
+      cand01_res_DC_CIFAR10_ConvNet_10ipc.pt: a2c7b379655f4f0cd032901c435d733a97784c038fa8b9bfbd7afd37aa455b6b
+      cand02_res_DC_CIFAR10_ConvNet_50ipc.pt: 358062b224c0d47514e5074d79a38b1aca82afe14784ef73a6174d4cd836a7c4
+    files:
+      - relpath: cand00_res_DC_CIFAR10_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1FMXANr0IRxVygzvtDI1wZwW4ZMzCKvwf
+        evidence:
+          - relpath: cand00_res_DC_CIFAR10_ConvNet_1ipc.pt
+            sha256: 4f90cb68ff60057ce1aabb02dd3f600d003f92298e2c037e7af0cbf9c0309586
+            kind: checkpoint_list
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-5.6101, 5.4002]
+      - relpath: cand01_res_DC_CIFAR10_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1XuPRBzBAI-bltNJeIwKQHdH0zN2LF_dW
+        evidence:
+          - relpath: cand01_res_DC_CIFAR10_ConvNet_10ipc.pt
+            sha256: a2c7b379655f4f0cd032901c435d733a97784c038fa8b9bfbd7afd37aa455b6b
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-7.6297, 6.3852]
+      - relpath: cand02_res_DC_CIFAR10_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=12-5NA7LgzYY-UZ9-MH_U78FMycTaHzn8
+        evidence:
+          - relpath: cand02_res_DC_CIFAR10_ConvNet_50ipc.pt
+            sha256: 358062b224c0d47514e5074d79a38b1aca82afe14784ef73a6174d4cd836a7c4
+            kind: checkpoint_list
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-8.0503, 8.1047]
+    status: ingested
+    notes: >
+      Authors' original release of DC. Data archives linked from the README
+      (Google Drive); pin exact URL + hash at first fetch. Content-identical
+      duplicates of the DC-BENCH copies are expected and handled by dedup.
+
+  - source_id: vico.dsa
+    release_lineage: dsa_zhao2021_iccvw
+    method: DSA
+    method_family: gradient_family
+    distribution: vico_dataset_condensation
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/VICO-UoE/DatasetCondensation
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DSA_CIFAR10_ConvNet_1ipc.pt: 325e0ecaba94a4c7e4de0d69522386a141d3cc981300bfddfbc62534fdafad87
+      cand01_res_DSA_CIFAR10_ConvNet_10ipc.pt: dcfc3337d7d61a5b3c8e1bad61fccd58f76a978e03be365a2467c4f193872cdd
+      cand02_res_DSA_CIFAR10_ConvNet_50ipc.pt: a38adbb094d77e4b82a78acccb1ca2b8a8f5e96dff3494ff37bbb12f3796b0e9
+    files:
+      - relpath: cand00_res_DSA_CIFAR10_ConvNet_1ipc.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1VHRFI0RXnKZuL4GrGfKZSszPYrKFuIVf
+        evidence:
+          - relpath: cand00_res_DSA_CIFAR10_ConvNet_1ipc.pt
+            sha256: 325e0ecaba94a4c7e4de0d69522386a141d3cc981300bfddfbc62534fdafad87
+            kind: checkpoint_list
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-5.519, 4.6124]
+      - relpath: cand01_res_DSA_CIFAR10_ConvNet_10ipc.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1msgZCUFhvSjGXWNzm0my1z1McYq-4IW9
+        evidence:
+          - relpath: cand01_res_DSA_CIFAR10_ConvNet_10ipc.pt
+            sha256: dcfc3337d7d61a5b3c8e1bad61fccd58f76a978e03be365a2467c4f193872cdd
+            kind: checkpoint_list
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-5.4725, 5.5203]
+      - relpath: cand02_res_DSA_CIFAR10_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1tqt2WAiuFXDX6y93Dqni1Gwv7tAF7hin
+        evidence:
+          - relpath: cand02_res_DSA_CIFAR10_ConvNet_50ipc.pt
+            sha256: a38adbb094d77e4b82a78acccb1ca2b8a8f5e96dff3494ff37bbb12f3796b0e9
+            kind: checkpoint_list
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-5.9296, 4.692]
+    status: ingested
+    notes: Authors' original release of DSA.
+
+  - source_id: vico.dm
+    release_lineage: dm_zhao2023_wacv
+    method: DM
+    method_family: distribution_family
+    distribution: vico_dataset_condensation
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/VICO-UoE/DatasetCondensation
+    label_type_expected: hard
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_res_DM_CIFAR10_ConvNet_50ipc.pt: 4c845ad693287c32eb95d74717ce00cfa2f92807b691ae67417659f831a30928
+    files:
+      - relpath: cand00_res_DM_CIFAR10_ConvNet_50ipc.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1QtFKXSCMIHPMT1Zh8cjJlDRT2kDGkGah
+        evidence:
+          - relpath: cand00_res_DM_CIFAR10_ConvNet_50ipc.pt
+            sha256: 4c845ad693287c32eb95d74717ce00cfa2f92807b691ae67417659f831a30928
+            kind: checkpoint_list
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-3.9709, 3.9782]
+    status: ingested
+    notes: Authors' original release of DM.
+
+  - source_id: mtt_official.mtt
+    release_lineage: mtt_cazenavette2022_cvpr
+    method: MTT
+    method_family: trajectory_family
+    distribution: mtt_distillation
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/GeorgeCazenavette/mtt-distillation
+    label_type_expected: hard
+    preprocessing_expected: raw
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256: {}
+    files: []
+    status: pending_fetch
+    notes: >
+      MTT official release. Measured 2026-09-05: README (commit
+      50dccea47ba48b9cfb3b9c59375d7da92e4e603b) and project page link no
+      distilled CIFAR-10 artifact; the official repo publishes code only.
+      The MTT lineage is covered by the DC-BENCH "TM" re-release
+      (dcbench.tm_mtt, tier 3); this entry remains registered for
+      completeness and is expected to stay unmapped.
+
+  - source_id: idc.idc
+    release_lineage: idc_kim2022_icml
+    method: IDC
+    method_family: parameterization_family
+    distribution: efficient_dataset_condensation
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/snu-mllab/Efficient-Dataset-Condensation
+    label_type_expected: unknown
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_data.pt: 9c9d2fa3103d7f64225f36f7a0c4359d16874cb0563f151baa07a5bd565a1a34
+      cand01_data.pt: 0c50c9b26daff5793e5e2b6d6e0f6b7a31fdfc83d4c56e3786918f850eeeeba6
+      cand02_data.pt: 09d5ee59975e0851425e7a559d19cd3815b37fa403853679b82e1ef9506637b2
+    files:
+      - relpath: cand00_data.pt
+        ipc: 1
+        url: https://drive.google.com/uc?id=1oxMlEV9MLY7yHTUby8lrco4Qdg9sAEx8
+        evidence:
+          - relpath: cand00_data.pt
+            sha256: 9c9d2fa3103d7f64225f36f7a0c4359d16874cb0563f151baa07a5bd565a1a34
+            kind: combined
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-0.0192, 1.0125]
+      - relpath: cand01_data.pt
+        ipc: 10
+        url: https://drive.google.com/uc?id=1IZkXnhSlovK3ig6a-h5pwT3L3bHCChi1
+        evidence:
+          - relpath: cand01_data.pt
+            sha256: 0c50c9b26daff5793e5e2b6d6e0f6b7a31fdfc83d4c56e3786918f850eeeeba6
+            kind: combined
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-0.0067, 1.0061]
+      - relpath: cand02_data.pt
+        ipc: 50
+        url: https://drive.google.com/uc?id=1IakcsMCqdbNiFPT7MiPuBxDuEFlKWfBP
+        evidence:
+          - relpath: cand02_data.pt
+            sha256: 09d5ee59975e0851425e7a559d19cd3815b37fa403853679b82e1ef9506637b2
+            kind: combined
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-0.0157, 1.0078]
+    status: ingested
+    notes: >
+      IDC (ICML 2022) official release. Some IDC variants learn soft labels;
+      label type is decided by QC at ingest. Soft-label artifacts are isolated
+      in the soft_label_dependent stratum and are never argmaxed into primary.
+
+  - source_id: datm.datm
+    release_lineage: datm_guo2024_iclr
+    method: DATM
+    method_family: trajectory_family
+    distribution: datm_official
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/NUS-HPC-AI-Lab/DATM
+    label_type_expected: unknown
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_images_best.pt: fb72c4a4b8f3e0f87965b63503429a41ab21f332b5191ad6afbd7aeaedf87eb9
+      cand01_labels_best.pt: 46beaf23fe33898795666d786cf6f7a6aad54280e529d9317ea0a9693f5c7838
+      cand02_images_best.pt: a0b393a874e8caa8dce772364fc59ccf7201e439c12bd3abf616ed09cb9ef831
+      cand03_labels_best.pt: 33e2a9baf7ee7c2cf99f5daf8c92063403a0c2e992448e3933b84f7cf6a1e084
+    files:
+      - parts:
+          - relpath: cand00_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1Z8i5sTwPQOidxVDsLj7i0FOLC-Egcu_y
+          - relpath: cand01_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1qqdMdvXc2IWLE6r-7oH458DxfyjEMARi
+        ipc: 10
+        evidence:
+          - relpath: cand00_images_best.pt
+            sha256: fb72c4a4b8f3e0f87965b63503429a41ab21f332b5191ad6afbd7aeaedf87eb9
+            kind: images_only
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-4.0584, 4.3567]
+          - relpath: cand01_labels_best.pt
+            sha256: 46beaf23fe33898795666d786cf6f7a6aad54280e529d9317ea0a9693f5c7838
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: soft
+            per_class_counts: {}
+            value_range: []
+      - parts:
+          - relpath: cand02_images_best.pt
+            role: images
+            url: https://drive.google.com/uc?id=1HJfsgdxFZsRz5MNRhPhwyxPSMycpA9Nk
+          - relpath: cand03_labels_best.pt
+            role: labels
+            url: https://drive.google.com/uc?id=1j-IFfwNmLH7i8M0Zuw-4xq29GqEqaOgF
+        ipc: 50
+        evidence:
+          - relpath: cand02_images_best.pt
+            sha256: a0b393a874e8caa8dce772364fc59ccf7201e439c12bd3abf616ed09cb9ef831
+            kind: images_only
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: none
+            per_class_counts: {}
+            value_range: [-8.9116, 8.265]
+          - relpath: cand03_labels_best.pt
+            sha256: 33e2a9baf7ee7c2cf99f5daf8c92063403a0c2e992448e3933b84f7cf6a1e084
+            kind: labels_only
+            n_images: 0
+            image_shape: []
+            label_type: soft
+            per_class_counts: {}
+            value_range: []
+    status: ingested
+    notes: >
+      DATM (ICLR 2024) official release. Soft-label use is IPC-dependent in
+      the paper; label type decided by QC at ingest.
+
+  - source_id: kip_official.kip
+    release_lineage: kip_nguyen2021_iclr
+    method: KIP
+    method_family: kernel_family
+    distribution: google_research_kip
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/google-research/google-research/tree/master/kip
+    label_type_expected: unknown
+    preprocessing_expected: unknown
+    license: Apache-2.0 (google-research repo); verify data terms at fetch
+    pinned_sha256: {}
+    files: []
+    status: pending_fetch
+    notes: >
+      KIP original release (google-research/kip). Released sets include
+      fixed-label (nol) and label-learned (l) variants; label-learned
+      variants go to soft_label_dependent. Official data live in GCS bucket
+      kip-datasets per kip/dataset.ipynb at commit
+      077b0ff78887ff08e84a25ea385fb66633e4ba21; measured 2026-09-05:
+      anonymous HTTPS GET/HEAD on the documented example object
+      kip/cifar10/ConvNet_ssize100_nozca_l_noaug_ckpt1000.npz and on
+      kip/kip.csv returns HTTP 403, so the bucket is not anonymously
+      readable and this source is currently unfetchable.
+
+  - source_id: datadam.datadam
+    release_lineage: datadam_sajedi2023_iccv
+    method: DataDAM
+    method_family: attention_family
+    distribution: datadam_official
+    dataset: cifar10
+    ipcs: [1, 10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/DataDistillation/DataDAM
+      - https://huggingface.co/datasets/uoft-dsp-lab/DataDAM
+    label_type_expected: unknown
+    preprocessing_expected: raw_unbounded
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256:
+      cand00_syn_data_cifar10_ipc_1.pt: 6aaa4d2cbea9b5e1ecfacb693d610f5e20ca44291776eb0fa2dca038b296fc18
+      cand01_syn_data_cifar10_ipc_10.pt: d3fa4fb97ca3d47ba368110c10eb7142c098ae5b9c03d0220a2dd8f5c7372e81
+      cand02_syn_data_cifar10_ipc_50.pt: 4ee72df601c694622f943916db864666e8d18393b788fb5fd9b1b8741822f7d5
+    files:
+      - relpath: cand00_syn_data_cifar10_ipc_1.pt
+        ipc: 1
+        url: https://huggingface.co/datasets/uoft-dsp-lab/DataDAM/resolve/main/cifar10/syn_data_cifar10_ipc_1.pt
+        evidence:
+          - relpath: cand00_syn_data_cifar10_ipc_1.pt
+            sha256: 6aaa4d2cbea9b5e1ecfacb693d610f5e20ca44291776eb0fa2dca038b296fc18
+            kind: combined
+            n_images: 10
+            image_shape: [10, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1}
+            value_range: [-9.9684, 8.9327]
+      - relpath: cand01_syn_data_cifar10_ipc_10.pt
+        ipc: 10
+        url: https://huggingface.co/datasets/uoft-dsp-lab/DataDAM/resolve/main/cifar10/syn_data_cifar10_ipc_10.pt
+        evidence:
+          - relpath: cand01_syn_data_cifar10_ipc_10.pt
+            sha256: d3fa4fb97ca3d47ba368110c10eb7142c098ae5b9c03d0220a2dd8f5c7372e81
+            kind: combined
+            n_images: 100
+            image_shape: [100, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 10, "1": 10, "2": 10, "3": 10, "4": 10, "5": 10, "6": 10, "7": 10, "8": 10, "9": 10}
+            value_range: [-4.1245, 4.2751]
+      - relpath: cand02_syn_data_cifar10_ipc_50.pt
+        ipc: 50
+        url: https://huggingface.co/datasets/uoft-dsp-lab/DataDAM/resolve/main/cifar10/syn_data_cifar10_ipc_50.pt
+        evidence:
+          - relpath: cand02_syn_data_cifar10_ipc_50.pt
+            sha256: 4ee72df601c694622f943916db864666e8d18393b788fb5fd9b1b8741822f7d5
+            kind: combined
+            n_images: 500
+            image_shape: [500, 3, 32, 32]
+            label_type: hard
+            per_class_counts: {"0": 50, "1": 50, "2": 50, "3": 50, "4": 50, "5": 50, "6": 50, "7": 50, "8": 50, "9": 50}
+            value_range: [-3.767, 3.8246]
+    status: ingested
+    notes: >
+      DataDAM (ICCV 2023) attention matching. Official repo URL verified
+      2026-09-05 against the publisher page: the ICCV 2023 Open Access paper
+      PDF (openaccess.thecvf.com, Sajedi et al.) states on page 1
+      "Code: https://github.com/DataDistillation/DataDAM". Repo README at
+      commit 0f6ea09ed019073933c9bd46382cd4aa3bec7fb8 links the official
+      released tensors on HuggingFace dataset uoft-dsp-lab/DataDAM (revision
+      45339deae180571f9505d7eff48945f0f44d69b2), incl. CIFAR-10 IPC 1/10/50.
+
+  - source_id: glad.glad
+    release_lineage: glad_cazenavette2023
+    method: GLaD
+    method_family: generative_family
+    distribution: glad_official
+    dataset: cifar10
+    ipcs: [10, 50]
+    source_tier: 2
+    official_urls:
+      - https://github.com/GeorgeCazenavette/glad
+    label_type_expected: unknown
+    preprocessing_expected: generator
+    license: to-verify at fetch (repo LICENSE)
+    pinned_sha256: {}
+    files: []
+    status: pending_fetch
+    notes: >
+      GLaD (2023) generative condensation. Released artifacts are generator
+      checkpoints, not image tensors: registered as decoder_dependent stratum,
+      excluded from the primary cohort by construction. Measured 2026-09-05:
+      README at commit fe628635bf75acccab90cbe30dc43bf5c3fc9ba3 links no
+      public checkpoint/data download; remains registered-only.

@@ -1,0 +1,34 @@
+# AuditBench-DD E0: CIFAR-10 official external candidate bank construction.
+# This stage only builds/audits/normalizes data and freezes the E1 protocol.
+# It never trains students and never compares proxies against utility.
+dataset: cifar10
+num_classes: 10
+image_size: 32
+
+manifest_path: manifests/cifar10_external_sources.yaml
+raw_dir: external/cifar10/raw        # downloaded/staged blobs (git-ignored)
+out_dir: external/cifar10            # canonical bank + bank_index.json
+report_path: runs/cifar10/auditbench_e0/e0_report.json
+e1_protocol_path: runs/cifar10/auditbench_e0/e1_protocol_frozen.json
+resolved_manifest_path: runs/cifar10/auditbench_e0/manifest_resolved.yaml
+
+fetch_enabled: true
+fetch_timeout_sec: 120
+fetch_retries: 2
+
+primary_ipcs: [10, 50]   # E1 primary cohort
+extreme_ipcs: [1]        # registered, excluded from coverage gates
+
+# Pre-frozen E0 gate thresholds (derived operationalization of the task's
+# qualitative gate definitions; frozen before seeing any E1 utility).
+gate_thresholds:
+  pass_strong:
+    min_lineages: 6            # independent release lineages in primary cohort
+    min_families: 6            # distinct method_family values covered
+    min_dual_ipc_lineages: 4   # lineages covering both IPC10 and IPC50
+    min_primary_entries: 12    # hard-label natural-image artifacts in bank
+  pass_minimum:
+    min_lineages: 4
+    min_families: 4
+    min_dual_ipc_lineages: 3
+    min_primary_entries: 8

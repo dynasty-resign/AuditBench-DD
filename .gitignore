@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+.tmp/
+__pycache__/
+*.pyc
+*.zip
+
+# Local credentials and generated SSH state
+.env
+.ssh/
+data/
+runs/
+checkpoints/
+*.egg-info/
+
+# Large local research inputs; provenance and hash manifests are versioned.
+external/
+参考论文/*.pdf
+
+.research_loop/logs/
+.research_loop/locks/
+.research_loop/state.json
+.research_loop/progress.md
+.env
+.env.*
